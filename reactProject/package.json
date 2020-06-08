@@ -10,8 +10,13 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@ant-design/react-native": "^3.3.0",
+    "@babel/plugin-proposal-decorators": "^7.10.1",
+    "loadash": "^1.0.0",
+    "module-resolver": "^1.0.0",
     "react": "16.11.0",
-    "react-native": "0.62.2"
+    "react-native": "0.62.2",
+    "react-timer-mixin": "^0.13.4"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
