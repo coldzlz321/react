@@ -24,8 +24,9 @@ export default class StartUpPage extends Component{
 
     render(){
         return (
-            <View style="styles.startWrap">
+            <View >
                 <StatusBar translucent backgroundColor="rgba(0,0,0,0)" barStyle="dark-content" />
+                <Text>你好</Text>
             </View>
         )
     }
