@@ -3,6 +3,8 @@ import * as Animatable from 'react-native-animatable';
 
 import {View,Text,Image,StyleSheet} from 'react-native';
 
+import TimerMixin from 'react-timer-mixin';
+
 const imgSource = require("@/img/startup/lbxxS.jpg")
 
 export default class StartUpSecond extends Component{
@@ -10,6 +12,12 @@ export default class StartUpSecond extends Component{
         super(props);
     }
 
+    componentDidMount(){
+        var {navigation} = this.props;
+        TimerMixin.setTimeout(() => {
+            navigation.navigate("AppStack")
+        },2000)
+    }
     
 
     render(){
