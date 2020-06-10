@@ -11,7 +11,7 @@ import React,{Component} from 'react'
 import {View,Text,StyleSheet,Image} from 'react-native'
 
 import Touchable from '@/components/Touchable/Touchable.js'
-
+import { setSize,setSizeText} from "@/utils/common/scale.js"
 
 
 const labels = ["主页","视频","我的"];
@@ -162,26 +162,25 @@ const styles = StyleSheet.create({
     borderTopColor:'#ccc'
   },
   textWrapper:{
-    fontSize:32,
-    width:100,
-    height:100,
-   lineHeight:100,
+    fontSize:setSizeText(32),
+    height:setSize(120),
+   lineHeight:setSize(120),
    textAlign:"center"  
   },
   tabItem:{ 
     flex: 1 ,
-    height:50,
+    height:setSize(100),
     alignItems:'center',
     justifyContent:'center'
   },
   tabImg:{
-    width:20,
-    height:20
+    width:setSize(54),
+    height:setSize(54)
   },
   tabItemContainer:{ 
     flex: 1,
     alignItems:'center',
     justifyContent:'center',
-    height:50
+    height:setSize(120)
 }
 })
