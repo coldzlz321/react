@@ -66,10 +66,10 @@ function MyTabBar({ state, descriptors, navigation }) {
           <Touchable
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{ flex: 1 ,height:50,alignItems:'center',justifyContent:'center'}}
+            style={styles.tabItem}
           >
-            <View style={{ flex: 1,alignItems:'center',justifyContent:'center',height:50}}>
-              <Image style={{width:20,height:20}}  source={tabImg}/>
+            <View style={styles.tabItemContainer}>
+              <Image style={styles.tabImg}  source={tabImg}/>
               <Text style={{ color: isFocused ? '#3498db' : '#333' ,marginTop:5}}>
                 {label}
               </Text>
@@ -167,5 +167,21 @@ const styles = StyleSheet.create({
     height:100,
    lineHeight:100,
    textAlign:"center"  
-  }
+  },
+  tabItem:{ 
+    flex: 1 ,
+    height:50,
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  tabImg:{
+    width:20,
+    height:20
+  },
+  tabItemContainer:{ 
+    flex: 1,
+    alignItems:'center',
+    justifyContent:'center',
+    height:50
+}
 })
