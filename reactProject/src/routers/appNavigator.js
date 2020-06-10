@@ -12,7 +12,7 @@ import {View,Text,StyleSheet,Image} from 'react-native'
 
 import Touchable from '@/components/Touchable/Touchable.js'
 import { setSize,setSizeText} from "@/utils/common/scale.js"
-
+import {toastC} from '@/utils/common/toast.js'
 
 const labels = ["主页","视频","我的"];
 
@@ -48,8 +48,7 @@ function MyTabBar({ state, descriptors, navigation }) {
             target: route.key,
             canPreventDefault: true,
           });
-         
-
+         toastC("你好")
           if (!isFocused && !event.defaultPrevented) {
             navigation.navigate(route.name);
           }
