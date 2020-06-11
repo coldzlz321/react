@@ -6,6 +6,8 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 
+import home from '@/views/Home/home.js'
+
 import React,{Component} from 'react'
 
 import {View,Text,StyleSheet,Image} from 'react-native'
@@ -79,13 +81,7 @@ function MyTabBar({ state, descriptors, navigation }) {
     </View>
   );
 }
-function home(){
-    return (
-      <View style={styles.container}>
-          <Text style={styles.textWrapper}>home</Text>
-      </View>
-    )
-}
+
 
 function personal(){
   return (
