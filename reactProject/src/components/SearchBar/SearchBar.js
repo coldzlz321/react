@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {View,Text,TextInput,Image,StyleSheet} from 'react-native';
+import {View,Text,TextInput,Image,StyleSheet,KeyboardAvoidingView} from 'react-native';
 import Touchable from "@/components/Touchable/Touchable.js";
 import {setSize,setSizeText} from "@/utils/common/scale.js"
 import {trim} from "@/utils/common/trim.js";
@@ -42,15 +42,17 @@ export default class CustomSearchBar extends Component {
     render(){
         let { placeHolder = "请输入关键字" } = this.props;
         return (
-            <View style={{flexDirection:"row",height:setSize(72),flex:1,marginTop:setSize(200)}}>
+            <View style={{flexDirection:"row",height:setSize(72),marginTop:setSize(50),marginBottom:setSize(40)}}>
                 <View style={styles.inputWrapper}>
                     <TextInput
+                        returnKeyType="search"
                         ref={(ref) => this.input = ref}
                         placeholder={placeHolder}
                         placeholderTextColor="#999"
                         onSubmitEditing={() => {}}
                         editable
                         autoFocus={true}
+                        underlineColorAndroid="transparent"
                         onChangeText={(text) => this._textChange(text)}
                         style={styles.searchInput}
                     />
