@@ -1,11 +1,13 @@
 import React,{Component} from 'react';
-import {View,Text,TextInput,Image,StyleSheet,KeyboardAvoidingView} from 'react-native';
+import {View,Text,TextInput,Image,StyleSheet,Keyboard} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Touchable from "@/components/Touchable/Touchable.js";
 import {setSize,setSizeText} from "@/utils/common/scale.js"
 import {trim} from "@/utils/common/trim.js";
 
 const searchIcon = require("@/img/search/icon-search.png");
 const delIcon = require("@/img/search/icon-search-del.png");
+
 
 export default class CustomSearchBar extends Component {
     constructor(props){
@@ -22,7 +24,7 @@ export default class CustomSearchBar extends Component {
 
     _goBack(){
         let { navigation } = this.props;
-        navigation.pop();
+        this.setState({text:"",showClearBtn:false},() =>{Keyboard.dismiss();navigation.goBack()});
     }  
 
     _textChange(text){

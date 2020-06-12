@@ -15,7 +15,7 @@ import {View,Text,StyleSheet,Image} from 'react-native'
 
 import Touchable from '@/components/Touchable/Touchable.js'
 import { setSize,setSizeText} from "@/utils/common/scale.js"
-import {toastC} from '@/utils/common/toast.js'
+import { createSwitchNavigator } from 'react-navigation';
 
 const labels = ["主页","视频","我的"];
 
@@ -51,7 +51,7 @@ function MyTabBar({ state, descriptors, navigation }) {
             target: route.key,
             canPreventDefault: true,
           });
-         toastC("你好")
+        
           if (!isFocused && !event.defaultPrevented) {
             navigation.navigate(route.name);
           }
@@ -92,9 +92,8 @@ function personal(){
   )
 }
 
-
-
 function tab(){
+  // flag = false;
   return (
     <Tab.Navigator tabBar={MyTabBar}>
         <Tab.Screen name="home" component={home} />
@@ -104,6 +103,8 @@ function tab(){
   )
 }
 
+var flag = true;
+
 export default class AppContainer extends Component{
     constructor(props){
         super(props);
@@ -112,18 +113,20 @@ export default class AppContainer extends Component{
     render(){
         return (
             <NavigationContainer>
+              
               <Stack.Navigator initialRouteName="StartUpOne">
-                <Stack.Screen name="StartUpOne" component={StartUp}
-                    options={{
+               
+                  <Stack.Screen name="StartUpOne" component={StartUp}
+                      options={{
+                          
+                          headerShown:false
+                        }}
+                  />
+                  <Stack.Screen name="StartUpTwo" component={StartUpSecond}
+                      options={{
                         
-                        headerShown:false
-                      }}
-                />
-                <Stack.Screen name="StartUpTwo" component={StartUpSecond}
-                     options={{
-                       
-                        headerShown:false
-                      }}
+                          headerShown:false
+                        }}
                 />
                  <Stack.Screen name="AppStack" component={tab}
                      options={{
@@ -131,6 +134,7 @@ export default class AppContainer extends Component{
                         headerShown:false
                       }}
                 />
+                    
               </Stack.Navigator>
             </NavigationContainer>
           );

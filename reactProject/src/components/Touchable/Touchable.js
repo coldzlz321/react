@@ -13,7 +13,7 @@ export default class Touchable extends Component{
     }
 
     debouncePress(){
-
+        console.log(1)
         let { onPress } = this.props;
         const nowClickTime = Date.now();
         if((!this.lastClickTime || Math.abs(nowClickTime - this.lastClickTime) > debounceMilliSecond)){
