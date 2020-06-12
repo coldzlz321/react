@@ -17,6 +17,7 @@ export default class CustomSearchBar extends Component {
         this._goBack.bind(this);
         this._textChange.bind(this);
         this._clearInput.bind(this);
+        this.setInputText.bind(this)
     }
 
     _goBack(){
@@ -33,10 +34,17 @@ export default class CustomSearchBar extends Component {
     }
 
     _clearInput(){
-        console.log(5);
         this.input.clear()
         this.setState({text:"",showClearBtn:false})
             
+    }
+
+    setInputText(text){
+        if(trim(text) == ""){
+            this._clearInput();
+            return;
+        }
+        this.setState({text:text,showClearBtn:true})
     }
 
     render(){
@@ -50,6 +58,7 @@ export default class CustomSearchBar extends Component {
                         placeholder={placeHolder}
                         placeholderTextColor="#999"
                         onSubmitEditing={() => {}}
+                        value={this.state.text}
                         editable
                         autoFocus={true}
                         underlineColorAndroid="transparent"
