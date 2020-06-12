@@ -1,6 +1,7 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import StartUp from '@/views/StartUp/startup.js';
 import StartUpSecond from '@/views/StartUp/startupSecond.js'
+import VideoHome from "@/views/Video/video.js";
 
 import {NavigationContainer} from '@react-navigation/native';
 
@@ -91,19 +92,13 @@ function personal(){
   )
 }
 
-function video(){
-  return (
-    <View style={styles.container}>
-        <Text style={styles.textWrapper}>video</Text>
-    </View>
-  )
-}
+
 
 function tab(){
   return (
     <Tab.Navigator tabBar={MyTabBar}>
         <Tab.Screen name="home" component={home} />
-        <Tab.Screen name="video" component={video} />
+        <Tab.Screen name="video" component={VideoHome} />
         <Tab.Screen name="personal" component={personal} />
     </Tab.Navigator>
   )
