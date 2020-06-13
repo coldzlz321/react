@@ -2,6 +2,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import StartUp from '@/views/StartUp/startup.js';
 import StartUpSecond from '@/views/StartUp/startupSecond.js'
 import VideoHome from "@/views/Video/video.js";
+import Personal from "@/views/personal/personal";
 
 import {NavigationContainer} from '@react-navigation/native';
 
@@ -84,13 +85,7 @@ function MyTabBar({ state, descriptors, navigation }) {
 }
 
 
-function personal(){
-  return (
-    <View style={styles.container}>
-        <Text style={styles.textWrapper}>personal</Text>
-    </View>
-  )
-}
+
 
 function tab(){
   // flag = false;
@@ -98,7 +93,7 @@ function tab(){
     <Tab.Navigator tabBar={MyTabBar}>
         <Tab.Screen name="home" component={home} />
         <Tab.Screen name="video" component={VideoHome} />
-        <Tab.Screen name="personal" component={personal} />
+        <Tab.Screen name="personal" component={Personal} />
     </Tab.Navigator>
   )
 }

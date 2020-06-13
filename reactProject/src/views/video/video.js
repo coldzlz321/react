@@ -41,7 +41,7 @@ export default class VideoHome extends Component {
                     </View>
                     <ScrollView
                         height={260}
-
+                        alwaysBounceVertical={true}
                         onLayout={(event) => {
                             let { x, y, width, height } = event.nativeEvent.layout;
                             this.setState({
