@@ -6,7 +6,7 @@ import {setSize,setSizeText} from "@/utils/common/scale.js"
 import {trim} from "@/utils/common/trim.js";
 
 const searchIcon = require("@/img/search/icon-search.png");
-const delIcon = require("@/img/search/icon-search-del.png");
+const delIcon = require("@/img/search/icon-search-clear.png");
 
 
 export default class CustomSearchBar extends Component {
@@ -14,7 +14,9 @@ export default class CustomSearchBar extends Component {
         super(props);
         this.state = {
             showClearBtn:false,
-            text:""
+            text:"",
+            showLabel:false,
+            labelText:"你好"
         }
         this._goBack.bind(this);
         this._textChange.bind(this);
@@ -24,7 +26,7 @@ export default class CustomSearchBar extends Component {
 
     _goBack(){
         let { navigation } = this.props;
-        this.setState({text:"",showClearBtn:false},() =>{Keyboard.dismiss();navigation.goBack()});
+        this.setState({text:"",showClearBtn:false,showLabel:false,labelText:""},() =>{Keyboard.dismiss();navigation.goBack()});
     }  
 
     _textChange(text){
@@ -41,16 +43,19 @@ export default class CustomSearchBar extends Component {
             
     }
 
+    
+
     setInputText(text){
         if(trim(text) == ""){
             this._clearInput();
             return;
         }
-        this.setState({text:text,showClearBtn:true})
+        this.setState({text:text,showLabel:true,showClearBtn:true,labelText:text})
     }
 
     render(){
         let { placeHolder = "请输入关键字" } = this.props;
+        placeHolder = this.state.showLabel ? "" : placeHolder
         return (
             <View style={{flexDirection:"row",height:setSize(72),marginTop:setSize(50),marginBottom:setSize(40)}}>
                 <View style={styles.inputWrapper}>
@@ -62,15 +67,26 @@ export default class CustomSearchBar extends Component {
                         onSubmitEditing={() => {}}
                         value={this.state.text}
                         editable
+                        onFocus={() => this.setState({showLabel:false,labelText:""})}
                         autoFocus={true}
                         underlineColorAndroid="transparent"
                         onChangeText={(text) => this._textChange(text)}
                         style={styles.searchInput}
                     />
+                    {this.state.showLabel &&
+                    
+                        <View style={styles.labelContainer}>
+                            <Text style={styles.labelText}>{this.state.labelText}</Text>
+                            <Touchable onPress={() => this.setState({showLabel:false,labelText:"",text:"",showClearBtn:false},() => this.input.focus())}>
+                                <Image source={delIcon} style={styles.labelImg} />
+                            </Touchable>
+                        </View>
+                    
+                    }
                     <Image source={searchIcon} style={styles.searchImg} />
-                {this.state.showClearBtn && 
+                {!this.state.showLabel && this.state.showClearBtn && 
                 <Touchable onPress={() => this._clearInput()}>
-                    <Image onPress={() => this._clearInput()} source={delIcon} style={styles.delImg} />
+                    <Image source={delIcon} style={styles.delImg} />
                 </Touchable>
                 }
                 </View>
@@ -122,5 +138,28 @@ const styles = StyleSheet.create({
         textAlign:'center',
         textAlignVertical:"center",
         color:"#3498db"
+    },
+    labelText:{
+        height:setSize(60),
+        textAlign:"center",
+        textAlignVertical:"center"
+    },
+    labelContainer:{
+        paddingLeft:setSize(20),
+        paddingRight:setSize(60),
+        minWidth:setSize(70),
+        backgroundColor:"#ccc",
+        position:"absolute",
+        left:setSize(72),
+        top:setSize(6),
+        borderRadius:setSize(32),
+        color:"#999"
+    },
+    labelImg:{
+        width:setSize(32),
+        height:setSize(32),
+        position:"absolute",
+        right:setSize(10),
+        top:setSize(14)
     }
 })
