@@ -3,6 +3,8 @@ import StartUp from '@/views/StartUp/startup.js';
 import StartUpSecond from '@/views/StartUp/startupSecond.js'
 import VideoHome from "@/views/Video/video.js";
 import Personal from "@/views/personal/personal";
+import LoginIndex from "@/views/Login/index";
+import ResetPassword  from "@/views/Login/resetPassword";
 
 import {NavigationContainer} from '@react-navigation/native';
 
@@ -27,6 +29,7 @@ const imgs = [[require("@/img/tab/icon-tab-home.png"),require("@/img/tab/icon-ta
 const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
+const Stack2 = createStackNavigator();
 
 function MyTabBar({ state, descriptors, navigation }) {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
@@ -84,7 +87,26 @@ function MyTabBar({ state, descriptors, navigation }) {
   );
 }
 
-
+function loginStack(){
+  return (
+  <Stack.Navigator initialRouteName="loginIndex">
+    <Stack.Screen name="loginIndex" component={LoginIndex}
+      options={
+        {
+          headerShown:false
+        }
+      }
+    />
+    <Stack.Screen name="resetPassword" component={ResetPassword}
+      options={
+        {
+          title:"重置密码"
+        }
+      }
+    />
+  </Stack.Navigator>
+  )
+}
 
 
 function tab(){
@@ -123,6 +145,13 @@ export default class AppContainer extends Component{
                           headerShown:false
                         }}
                 />
+                <Stack.Screen name="loginStack"
+                  component={loginStack}
+                      options={{
+                        headerShown:false
+                      }}  
+                />
+
                  <Stack.Screen name="AppStack" component={tab}
                      options={{
                        

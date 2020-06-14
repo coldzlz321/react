@@ -25,13 +25,13 @@ export default class ModalWrapper extends Component {
         return (
             //    <View style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(0, 0, 0, 0.6)'}]}>
             <Modal
-                animationType="fade"
+                animationType="slide"
                 transparent={true}
                 visible={this.state.showModal}
                 hardwareAccelerated={true}
                 style={[styles.ModalWrapper, { margin: 0 }]}
             >
-                <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
+                <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
                     <View
                         style={styles.ModalWrapper}
                     >
@@ -65,7 +65,14 @@ const styles = StyleSheet.create({
         borderRadius: setSize(20),
         marginLeft: setSize(-300),
         marginTop: setSize(-250),
-        overflow: "hidden"
+        overflow: "hidden",
+        shadowColor:"rgba(255,0,0,1)",
+        shadowOffset:{
+            width:0,
+            height:0
+        },
+        shadowRadius:setSize(300),
+        shadowOpacity:1
     },
     modalTitle: {
         width: setSize(600),
@@ -79,8 +86,8 @@ const styles = StyleSheet.create({
     ModalContent: {
         width: setSize(600),
         height: setSize(300),
-        borderBottomColor: "#dcdcdc",
-        borderBottomWidth: 1
+        // borderBottomColor: "#dcdcdc",
+        // borderBottomWidth: 1
     },
     modalBottom: {
         flex: 1

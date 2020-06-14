@@ -20,7 +20,12 @@ export default class Home extends Component {
         this.state = {
             tabItem: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             activeTab: 0,
-            layout: []
+            layout: [],
+            scrollHalfWidth:0,
+            scrollPosition:{
+                x:0,
+                y:0
+            }
         }
         this._renderTab.bind(this)
         this._tabClick.bind(this)
@@ -32,15 +37,24 @@ export default class Home extends Component {
         this.setState({ activeTab: index },
             () => {
                 this.tableView.goToPage(index);
+                
+               let  animated = !!this.state.layout[index] && true 
+               console.log(this.state.scrollPosition,1)
+                this.scrollContainer.scrollTo({ x: this.state.layout[index], y: 0, animated: animated ,duration:2000})
+                
 
-                this.scrollContainer.scrollTo({ x: this.state.layout[index], y: 0, animated: true })
             })
     }
     _layout(event, index) {
         let { x, y, width, height } = event.nativeEvent.layout;
         let arr = this.state.layout.slice(0);
-        arr[index] = Math.round(x)
-
+        if(this.state.scrollHalfWidth && (x - this.state.scrollHalfWidth + width / 2 > 0)){
+            arr[index] = Math.round(x - this.state.scrollHalfWidth + width / 2);
+        }else{
+            arr[index] = 0  
+        }
+        
+        
         this.setState({ layout: arr });
     }
 
@@ -48,7 +62,11 @@ export default class Home extends Component {
         return (
             <View style={{ height: setSize(60) }}>
                 <ScrollView ref={(el) => this.scrollContainer = el} horizontal={true} style={{ backgroundColor: "rgba(0,255,0,1)" }}
-                    showsHorizontalScrollIndicator={false}
+                   onLayout={(event) => this.setState({scrollHalfWidth:event.nativeEvent.layout.width / 2})}
+                   showsHorizontalScrollIndicator={false}
+                   contentOffset={this.state.scrollPosition}
+                   
+                   onMomentumScrollEnd={(event) => {console.log(event.nativeEvent.contentOffset,2);this.setState({scrollPosition:{...event.nativeEvent.contentOffset}})}}
                 >
                     {this.state.tabItem.map((item, index) => (
 
