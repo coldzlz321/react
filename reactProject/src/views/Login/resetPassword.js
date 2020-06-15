@@ -1,6 +1,7 @@
 import React,{Component} from "react";
 import {View,Text,Image,StyleSheet,TextInput,Picker} from "react-native";
 import { setSize, setSizeText } from "@/utils/common/scale";
+import Scrollable from "react-native-scrollable-tab-view"
 
 
 
@@ -26,7 +27,7 @@ export default class ResetPassword extends Component{
                 </View>
                 <View style={styles.resetRow}>
                     
-                    <TextInput style={styles.input} textContentType="creditCardNumber" />
+                    <TextInput  style={styles.input} textContentType="creditCardNumber" />
                 </View>
                 <View style={styles.nextBtnRow}>
                     <Text style={styles.nextBtn} onPress={() => this.setState({canReset:true})}>
@@ -53,13 +54,13 @@ export default class ResetPassword extends Component{
                     <Text style={styles.newPasswordLabel}>
 
                     </Text>
-                    <TextInput />
+                    <TextInput  style={styles.input} secureTextEntry={true} />
                 </View>
                 <View style={styles.newPasswordRow}>
                     <Text style={styles.newPasswordLabel}>
 
                     </Text>
-                    <TextInput />
+                    <TextInput  style={styles.input} secureTextEntry={true} />
                 </View>
                 <View style={styles.confirmBtnRow}>
                     <Text style={styles.confirmBtn}>

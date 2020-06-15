@@ -54,10 +54,10 @@ export default class CustomSearchBar extends Component {
     }
 
     render(){
-        let { placeHolder = "请输入关键字" } = this.props;
+        let { placeHolder = "请输入关键字",autoFocus=true ,editable=true,showCancel=true} = this.props;
         placeHolder = this.state.showLabel ? "" : placeHolder
         return (
-            <View style={{flexDirection:"row",height:setSize(72),marginTop:setSize(50),marginBottom:setSize(40)}}>
+            <View style={{flexDirection:"row",height:setSize(72),marginBottom:setSize(40)}}>
                 <View style={styles.inputWrapper}>
                     <TextInput
                         returnKeyType="search"
@@ -66,7 +66,7 @@ export default class CustomSearchBar extends Component {
                         placeholderTextColor="#999"
                         onSubmitEditing={() => {}}
                         value={this.state.text}
-                        editable
+                        editable={editable}
                         onFocus={() => this.setState({showLabel:false,labelText:""})}
                         autoFocus={true}
                         underlineColorAndroid="transparent"
@@ -91,7 +91,7 @@ export default class CustomSearchBar extends Component {
                 }
                 </View>
             
-                <Text onPress={() => this._goBack()} style={styles.cancelBtn}>取消</Text>
+               {showCancel && <Text onPress={() => this._goBack()} style={styles.cancelBtn}>取消</Text>}
             
             </View>
         )

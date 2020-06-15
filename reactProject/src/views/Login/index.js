@@ -3,23 +3,40 @@ import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from 'reac
 import { setSize, setSizeText } from '@/utils/common/scale';
 import Touchable from "@/components/Touchable/Touchable";
 import { BoxShadow } from "react-native-shadow"
+import Loading from "@/components/higherOrderComponents/loading";
+import TimerMixin from 'react-timer-mixin';
+import loading from '@/components/higherOrderComponents/loading';
+import { defaultProps } from '@ant-design/react-native/lib/search-bar/PropsType';
 
 
 const userIcon = require("@/img/login/icon-login-user.png");
 const passwordIcon = require("@/img/login/icon-login-password.png");
 
 
-
-export default class LoginIndex extends Component {
+@loading(state => state.loading)
+class LoginIndex extends Component {
     constructor(props) {
         super(props);
         this.state = {
             showShadow: false,
             btnWidth: 100,
             activeTabIndex: 0,
-            tabArr: ["短信验证码", "用户密码"]
+            tabArr: ["短信验证码", "用户密码"],
+            loading:true
         }
+        
 
+        
+    }
+
+    static defaultProps = {
+          loading:false
+    }
+    componentDidMount(){
+        
+        TimerMixin.setTimeout(() => {defaultProps.loading = false;this.setState({loading:false});},5)
+    
+        
     }
 
 
@@ -74,7 +91,7 @@ export default class LoginIndex extends Component {
                             this.state.activeTabIndex == 1 ?
                                 <View style={[styles.loginInputRow, { marginBottom: setSize(80) }]}>
                                     <Image source={passwordIcon} style={styles.loginImg} />
-                                    <TextInput textContentType="password" placeholder="请输入密码" placeholderTextColor="#999" ref={(ref) => this.password = ref} style={styles.loginInput} />
+                                    <TextInput secureTextEntry={true} textContentType="password" placeholder="请输入密码" placeholderTextColor="#999" ref={(ref) => this.password = ref} style={styles.loginInput} />
                                 </View>
                                 :
                                 <View style={[styles.loginInputRow, { marginBottom: setSize(80) }]}>
@@ -195,3 +212,5 @@ const styles = StyleSheet.create({
        
     }
 })
+
+export default LoginIndex;

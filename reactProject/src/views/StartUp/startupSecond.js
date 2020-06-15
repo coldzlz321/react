@@ -15,7 +15,7 @@ export default class StartUpSecond extends Component{
     componentDidMount(){
         var {navigation} = this.props;
         TimerMixin.setTimeout(() => {
-            navigation.navigate("loginStack")
+            navigation.navigate("AppStack")
         },2000)
     }
     

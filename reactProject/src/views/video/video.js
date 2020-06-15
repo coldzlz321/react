@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "column",
         paddingHorizontal: setSize(20),
-        paddingTop: setSize(20)
+        paddingTop: setSize(50)
     },
     sectionTitleRow: {
         flexDirection: "row",
