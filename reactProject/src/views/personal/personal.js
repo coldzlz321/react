@@ -4,7 +4,7 @@ import SearchBar from "@/components/SearchBar/SearchBar"
 import Touchable from "@/components/Touchable/Touchable"
 import { setSize } from '@/utils/common/scale';
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view'
-import ModalSwipeOut from "@/components/Modal/ModalSwipeOut"
+import ModalProgress from "@/components/Modal/ModalProgress"
 
 
 const itemImg = require("@/img/startup/lbxx.jpg");
@@ -82,7 +82,7 @@ export default class PersonalHome extends Component{
                                 <Text style={{flex:1,height:setSize(50),textAlign:"center",textAlignVertical:"center",fontSize:setSize(32)}}>打开弹框</Text>
                             </View>
                         </Touchable>
-                         <ModalSwipeOut ref={(ref) => this.model = ref} />
+                         <ModalProgress ref={(ref) => this.model = ref} />
                     {/* <View style={styles.scrollTab}>
                         <ScrollableTabBar>
 

@@ -27,9 +27,10 @@ export default class ModalWrapper extends Component {
             <Modal
                 animationType="slide"
                 transparent={true}
+                onRequestClose={() => this._hideModal()}
                 visible={this.state.showModal}
                 hardwareAccelerated={true}
-                style={[styles.ModalWrapper, { margin: 0 }]}
+
             >
                 <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
                     <View

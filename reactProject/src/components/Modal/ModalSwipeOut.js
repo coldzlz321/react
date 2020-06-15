@@ -152,6 +152,7 @@ export default class ModalSwipeOut extends Component {
         <Modal
             transparent={true}
             visible={this.state.showModal}
+            onRequestClose={() => this._hideModal()}
         >
             <View style={styles.container}>
                 <View style={styles.cardContainer}>

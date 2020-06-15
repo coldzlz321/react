@@ -25,6 +25,7 @@ export default class ModalLoading extends Component{
             <Modal 
                 animationType="fade"
                 transparent={true}
+                onRequestClose={() => this._hideModal()}
                 visible={this.state.showModal}
             >
                 <View style={styles.loadingContainer}>

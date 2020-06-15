@@ -81,6 +81,8 @@ target 'reactProject' do
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
+  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
+
   target 'reactProjectTests' do
     inherit! :complete
     # Pods for testing
