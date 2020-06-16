@@ -1,10 +1,10 @@
 import React,{Component} from 'react';
-import { View,Text,Image,StyleSheet,ScrollView,FlatList} from "react-native";
+import { View,Text,Image,StyleSheet,ScrollView,FlatList,RefreshControl} from "react-native";
 import SearchBar from "@/components/SearchBar/SearchBar"
 import Touchable from "@/components/Touchable/Touchable"
 import { setSize } from '@/utils/common/scale';
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view'
-import ModalProgress from "@/components/Modal/ModalProgress"
+import ModalCodeInput from "@/components/Modal/ModalCodeInput"
 
 
 const itemImg = require("@/img/startup/lbxx.jpg");
@@ -13,6 +13,7 @@ export default class PersonalHome extends Component{
     constructor(props){
         super(props);
         this.state={
+            refreshing:true,
             showModal:false,
             halfWidth:0,
             canScroll:true,
@@ -82,7 +83,7 @@ export default class PersonalHome extends Component{
                                 <Text style={{flex:1,height:setSize(50),textAlign:"center",textAlignVertical:"center",fontSize:setSize(32)}}>打开弹框</Text>
                             </View>
                         </Touchable>
-                         <ModalProgress ref={(ref) => this.model = ref} />
+                         <ModalCodeInput ref={(ref) => this.model = ref} />
                     {/* <View style={styles.scrollTab}>
                         <ScrollableTabBar>
 
