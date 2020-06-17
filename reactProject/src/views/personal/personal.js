@@ -194,9 +194,10 @@ export default class PersonalHome extends Component {
                             </MenuProvider>
                         </View>
                     </View>
-                    <Touchable onPress={() => this._showTimePicker()}>
+                    <Touchable onLongPress={() => { Clipboard.setString("事件"); this.showClipboard() }}
+                     onPress={() => this._showTimePicker()}>
                         <View style={styles.timeBtnRow}>
-                            <Text onLongPress={() => { Clipboard.setString("事件"); this.showClipboard() }} style={styles.timeBtn}>事件</Text>
+                            <Text  style={styles.timeBtn}>事件</Text>
                         </View>
                     </Touchable>
                     <View style={styles.timeContainer}>
@@ -245,19 +246,22 @@ const styles = StyleSheet.create({
 
     },
     timeBtnRow: {
-        height: setSize(200),
+        height: setSize(100),
+        width:setSize(200),
         alignItems: "center",
         justifyContent: "center",
-        marginTop: setSize(40)
-    },
-    timeBtn: {
-        width: setSize(100),
-        height: setSize(40),
-        textAlign: "center",
-        textAlignVertical: "center",
+        marginTop: setSize(40),
         borderColor: "#dcdcdc",
         borderWidth: 1,
-        borderRadius: setSize(20)
+        borderRadius: setSize(20),
+        alignSelf:"center"
+    },
+    timeBtn: {
+        flex:1,
+        width:setSize(200),
+        textAlign: "center",
+        textAlignVertical: "center",
+        
     },
     timeContainer: {
         height: setSize(100),
