@@ -83,6 +83,8 @@ target 'reactProject' do
 
   pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
 
+  pod 'RNDateTimePicker', :path => '../node_modules/@react-native-community/datetimepicker'
+
   target 'reactProjectTests' do
     inherit! :complete
     # Pods for testing

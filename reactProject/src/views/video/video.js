@@ -4,9 +4,12 @@ import SearchBar from "@/components/SearchBar/SearchBar.js";
 import Touchable from "@/components/Touchable/Touchable.js";
 import { ScrollView } from 'react-native-gesture-handler';
 import { setSize, deviceWidth, setSizeText } from "@/utils/common/scale.js"
+import Back from "@/components/higherOrderComponents/backHandler"
 
 
 const delIcon = require("@/img/search/icon-search-del.png");
+
+@Back()
 export default class VideoHome extends Component {
     constructor(props) {
         super(props);

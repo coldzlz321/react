@@ -10,7 +10,6 @@ export default class ModalCodeInput extends Component {
     constructor(props){
         super(props);
         this.state = {
-            showModal:false,
             countDonwSecond:60,
             showGetBtn:false,
             codeArray:codeArr,
@@ -32,11 +31,13 @@ export default class ModalCodeInput extends Component {
    }
 
     _showModal(){
-        this.setState({showModal:true})
+       let {modalShow} = this.props;
+        modalShow(true)
     }
 
     _hideModal(){
-        this.setState({showModal:false})
+        let {modalShow} = this.props;
+        modalShow(false)
     }
 
     _handleKeyPress({ nativeEvent: { key: keyValue } },index){
@@ -47,7 +48,7 @@ export default class ModalCodeInput extends Component {
             if(index == codeArr.length - 1){
                 arr[index] = ""
             }else if(index == 0){
-                this.setState({showModal:false})
+                this._hideModal()
             }
             --index
             if(index < 0) return;
@@ -90,9 +91,10 @@ export default class ModalCodeInput extends Component {
 
     render(){
         return (
+            
             <Modal
             transparent={false}
-            visible={this.state.showModal}
+        
             onRequestClose={() => {}}
             >
                 <View style={styles.container}>
@@ -111,7 +113,7 @@ export default class ModalCodeInput extends Component {
                             ref={(ref) => this.codeRefs[index] = ref}
                             style={styles.input}
                             maxLength={1}
-                            onBlur={() => {this.state.activeIndex == index && this.state.activeIndex != (codeArr.length - 1) ? this.codeRefs[index].focus() : ""}}
+                            // onBlur={() => {this.state.activeIndex == index && this.state.activeIndex != (codeArr.length - 1) ? this.codeRefs[index].focus() : ""}}
                             selectionColor="#ddd"
                             onChangeText={(value) => {let reg =/[0-9]/g ;if(!reg.test(value)) this.codeRefs[index].clear()}}
                             keyboardType="number-pad"

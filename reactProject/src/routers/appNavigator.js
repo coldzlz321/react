@@ -112,10 +112,10 @@ function loginStack(){
 function tab(){
   // flag = false;
   return (
-    <Tab.Navigator tabBar={MyTabBar}>
-        <Tab.Screen name="home" component={home} />
-        <Tab.Screen name="video" component={VideoHome} />
-        <Tab.Screen name="personal" component={Personal} />
+    <Tab.Navigator backBehavior="none" tabBar={MyTabBar}>
+        <Tab.Screen   name="home" component={home} />
+        <Tab.Screen backBehavior="none" name="video" component={VideoHome} />
+        <Tab.Screen backBehavior="none" name="personal" component={Personal} />
     </Tab.Navigator>
   )
 }

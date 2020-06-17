@@ -9,11 +9,12 @@ import Swiper from 'react-native-swiper';
 
 import Config from '@/styles/config.js'
 
-
+import Back from "@/components/higherOrderComponents/backHandler"
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view'
 
 const imgs = [require("@/img/startup/lbxx.jpg"), require("@/img/startup/lbxxS.jpg")]
 
+@Back()
 export default class Home extends Component {
     constructor(props) {
         super(props);
