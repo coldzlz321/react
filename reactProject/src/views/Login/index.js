@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, BackHandler } from 'react-native';
 import { setSize, setSizeText } from '@/utils/common/scale';
 import Touchable from "@/components/Touchable/Touchable";
 import { BoxShadow } from "react-native-shadow"
@@ -10,7 +10,9 @@ import { defaultProps } from '@ant-design/react-native/lib/search-bar/PropsType'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as CommonAction from "@/actions/common"
+import withGoBack from "@/components/higherOrderComponents/backHandler"
 import store from '@/store/store';
+import { toastC } from '@/utils/common/toast';
 
 const userIcon = require("@/img/login/icon-login-user.png");
 const passwordIcon = require("@/img/login/icon-login-password.png");
@@ -34,10 +36,11 @@ class LoginIndex extends Component {
 
 
     componentDidMount() {
+         console.log(100000)
         let now = new Date().getTime();
         let { CommonAction } = this.props;
         new Promise((resolve, reject) => {
-            TimerMixin.setTimeout(() => { CommonAction.showLoading(); resolve() }, 5000)
+            TimerMixin.setTimeout(() => { console.log(100);CommonAction.showLoading(); resolve() }, 5000)
 
         }).then(() => {
 
@@ -46,13 +49,25 @@ class LoginIndex extends Component {
         })
 
 
-
+        BackHandler.addEventListener("hardwareBackPress",() => {
+            let now = new Date().getTime()
+            if(this.lastTime && (now - this.lastTime) < 1000){
+                    BackHandler.exitApp()
+                    return true;
+            }
+            toastC("双击退出")
+            
+            this.lastTime = now;
+            return true
+        })
 
 
 
     }
 
-
+    componentWillUnmount(){
+        BackHandler.removeEventListener("hardwareBackPress")
+    }
 
 
     render() {

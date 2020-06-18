@@ -15,6 +15,7 @@ export default class ModalCodeInput extends Component {
             codeArray:codeArr,
             activeIndex:0
         }
+    
         this._showModal.bind(this);
         this._hideModal.bind(this);
         this._setCountDown.bind(this);

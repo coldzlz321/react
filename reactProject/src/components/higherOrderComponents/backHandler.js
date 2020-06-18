@@ -5,9 +5,11 @@ import { toastC } from '@/utils/common/toast';
 export default backHandler = (params = {}) => (wrapperComponent) => class extends wrapperComponent{
     constructor(props){
         super(props);
+        
     }
 
     componentDidMount(){
+        
         super.ComponentDidMount && super.ComponentDidMount()
         console.log(10)
         BackHandler.removeEventListener("hardwareBackPress")
