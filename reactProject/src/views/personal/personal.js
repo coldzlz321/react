@@ -25,7 +25,7 @@ export default class PersonalHome extends Component {
 
         this.state = {
             swiperItems: ["今夜大暴雨", "明天大雨", "后天晴朗", "后天晴朗2"],
-            dateStr: new Date().toJSON().substring(0, 10),
+            
             date: new Date(),
             mode: "date",
             showTime: false,

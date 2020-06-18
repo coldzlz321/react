@@ -7,7 +7,10 @@ import Loading from "@/components/higherOrderComponents/loading";
 import TimerMixin from 'react-timer-mixin';
 import loading from '@/components/higherOrderComponents/loading';
 import { defaultProps } from '@ant-design/react-native/lib/search-bar/PropsType';
-
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as CommonAction from "@/actions/common"
+import store from '@/store/store';
 
 const userIcon = require("@/img/login/icon-login-user.png");
 const passwordIcon = require("@/img/login/icon-login-password.png");
@@ -22,21 +25,31 @@ class LoginIndex extends Component {
             btnWidth: 100,
             activeTabIndex: 0,
             tabArr: ["短信验证码", "用户密码"],
-            loading:true
+            loading: true
         }
-        
 
-        
+
+
     }
 
-    static defaultProps = {
-          loading:false
-    }
-    componentDidMount(){
-        
-        TimerMixin.setTimeout(() => {defaultProps.loading = false;this.setState({loading:false});},5)
-    
-        
+
+    componentDidMount() {
+        let now = new Date().getTime();
+        let { CommonAction } = this.props;
+        new Promise((resolve, reject) => {
+            TimerMixin.setTimeout(() => { CommonAction.showLoading(); resolve() }, 5000)
+
+        }).then(() => {
+
+            TimerMixin.setTimeout(() => { CommonAction.hideLoading(); console.log((new Date().getTime() - now) / 1000) }, 5000)
+
+        })
+
+
+
+
+
+
     }
 
 
@@ -69,11 +82,13 @@ class LoginIndex extends Component {
                         <View style={styles.loginTabRow}>
                             {
                                 this.state.tabArr.map((item, index) =>
-                                    <Text 
-                                    onPress={() => this.setState({activeTabIndex:index})}
-                                    key={index} style={[styles.loginTabItem,
-                                        {marginRight:index == 0 ? 50 : 0,borderBottomWidth:index == this.state.activeTabIndex ? 1 : 0,
-                                        borderBottomColor:"#59b8fa" ,color: index == this.state.activeTabIndex ? "#59b8fa" : "#34495e"}]}>{this.state.tabArr[index]}</Text>
+                                    <Text
+                                        onPress={() => this.setState({ activeTabIndex: index })}
+                                        key={index} style={[styles.loginTabItem,
+                                        {
+                                            marginRight: index == 0 ? 50 : 0, borderBottomWidth: index == this.state.activeTabIndex ? 1 : 0,
+                                            borderBottomColor: "#59b8fa", color: index == this.state.activeTabIndex ? "#59b8fa" : "#34495e"
+                                        }]}>{this.state.tabArr[index]}</Text>
                                 )
 
                             }
@@ -196,21 +211,26 @@ const styles = StyleSheet.create({
         color: "#59b8fa",
         fontSize: setSize(32),
         marginLeft: setSize(40),
-        fontWeight:"bold"
+        fontWeight: "bold"
     },
-    loginTabRow:{
-        height:setSize(80),
-        flexDirection:"row",
-        alignContent:"center",
-        justifyContent:"center"
+    loginTabRow: {
+        height: setSize(80),
+        flexDirection: "row",
+        alignContent: "center",
+        justifyContent: "center"
     },
-    loginTabItem:{
-        height:setSize(80),
-        textAlign:"center",
-        textAlignVertical:"center",
-        lineHeight:setSize(80),
-       
+    loginTabItem: {
+        height: setSize(80),
+        textAlign: "center",
+        textAlignVertical: "center",
+        lineHeight: setSize(80),
+
     }
 })
 
-export default LoginIndex;
+export default connect((state, props) => ({
+    loading: state.loading
+}), (dispatch) => ({
+    CommonAction: bindActionCreators(CommonAction, dispatch)
+}))(LoginIndex)
+

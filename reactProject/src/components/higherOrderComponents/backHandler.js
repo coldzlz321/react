@@ -15,10 +15,11 @@ export default backHandler = (params = {}) => (wrapperComponent) => class extend
             let now = new Date().getTime()
             if(this.lastTime && (now - this.lastTime) < 1000){
                     BackHandler.exitApp();
-                    return;
+                    return true;
             }
             toastC("双击退出")
             this.lastTime = now;
+            return true
         })
     }
 
@@ -35,3 +36,4 @@ export default backHandler = (params = {}) => (wrapperComponent) => class extend
         )
     }
 }
+

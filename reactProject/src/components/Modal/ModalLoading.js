@@ -21,12 +21,13 @@ export default class ModalLoading extends Component{
     }
 
     render(){
+        let {loading} = this.props;
         return (
             <Modal 
                 animationType="fade"
                 transparent={true}
                 onRequestClose={() => this._hideModal()}
-                visible={this.state.showModal}
+                visible={loading}
             >
                 <View style={styles.loadingContainer}>
                     <View style={styles.loadingCard}>
