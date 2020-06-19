@@ -131,7 +131,7 @@ export default class AppContainer extends Component{
         return (
             <NavigationContainer>
               
-              <Stack.Navigator initialRouteName="StartUpOne">
+              <Stack.Navigator mode="card" initialRouteName="StartUpOne">
                
                   <Stack.Screen name="StartUpOne" component={StartUp}
                       options={{

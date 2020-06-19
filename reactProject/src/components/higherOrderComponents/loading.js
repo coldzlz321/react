@@ -14,10 +14,9 @@ export default withLoading = (isLoading) => (WrapperComponent) => class extends 
 
 
     render(){
-        let { loading } = this.props;
         return (
             <View style={styles.container}>
-                <Loading loading={loading} />
+                <Loading  />
                 {super.render()}
             </View>
         )

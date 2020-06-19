@@ -1,23 +1,26 @@
 import React ,{Component} from 'react';
 import {Text,View,StyleSheet,Image,Modal,ActivityIndicator} from "react-native";
 import { setSize } from '@/utils/common/scale';
+import Touchable from "@/components/Touchable/Touchable"
+import {connect} from "react-redux"
+import {bindActionCreators} from "redux"
+import * as CommonAction from "@/actions/common"
 
-export default class ModalLoading extends Component{
+class ModalLoading extends Component{
     constructor(props){
         super(props);
-        this.state = {
-            showModal:false
-        }
         this._showModal.bind(this);
         this._hideModal.bind(this)
     }
 
     _showModal(){
-        this.setState({showModal:true})
+        let {CommonAction } = this.props;
+        CommonAction.showLoading()
     }
 
     _hideModal(){
-        this.setState({showModal:false})
+        let {CommonAction } = this.props;
+        CommonAction.hideLoading()
     }
 
     render(){
@@ -29,12 +32,16 @@ export default class ModalLoading extends Component{
                 onRequestClose={() => this._hideModal()}
                 visible={loading}
             >
+            <Touchable onPress={() => this._hideModal()}>
                 <View style={styles.loadingContainer}>
-                    <View style={styles.loadingCard}>
-                        <ActivityIndicator size="large" />
-                        <Text style={styles.loadingText}>正在努力加载中...</Text>
-                    </View>
+                    <Touchable onPress={() => {return true}}>
+                        <View style={styles.loadingCard}>
+                            <ActivityIndicator size="large" />
+                            <Text style={styles.loadingText}>正在努力加载中...</Text>
+                        </View>
+                    </Touchable>
                 </View>
+            </Touchable>
             </Modal>
         )
     }
@@ -63,3 +70,9 @@ const styles = StyleSheet.create({
         marginTop:setSize(30),
     }
 })
+
+export default connect((state,props) => ({
+    loading:state.loading
+}),(dispatch) => ({
+    CommonAction:bindActionCreators(CommonAction,dispatch)
+}))(ModalLoading)

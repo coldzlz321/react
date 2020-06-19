@@ -13,30 +13,36 @@ import * as CommonAction from "@/actions/common"
 import withGoBack from "@/components/higherOrderComponents/backHandler"
 import store from '@/store/store';
 import { toastC } from '@/utils/common/toast';
+import ModalScroll from "@/components/Modal/ModalScroll"
 
 const userIcon = require("@/img/login/icon-login-user.png");
 const passwordIcon = require("@/img/login/icon-login-password.png");
 
 
-@loading(state => state.loading)
+@loading(props => props.loading)
 class LoginIndex extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            showModalScroll:false,
             showShadow: false,
             btnWidth: 100,
             activeTabIndex: 0,
             tabArr: ["短信验证码", "用户密码"],
             loading: true
         }
-
+        this.showModalScroll.bind(this)
 
 
     }
 
+    showModalScroll(flag){
+        this.setState({
+            showModalScroll:flag
+        })
+    }
 
     componentDidMount() {
-         console.log(100000)
         let now = new Date().getTime();
         let { CommonAction } = this.props;
         new Promise((resolve, reject) => {
@@ -133,6 +139,7 @@ class LoginIndex extends Component {
                         <BoxShadow setting={shadowOpt} >
                             <Touchable onPressIn={() => { this.setState({ showShadow: true }) }}
                                 onPressOut={() => { this.setState({ showShadow: false }) }}
+                                onPress={() => this.showModalScroll(true)}
                                 style={styles.loginBtn} >
                                 <Text style={[styles.loginBtn, { width: this.state.btnWidth }]}  >
                                     登录
@@ -144,6 +151,10 @@ class LoginIndex extends Component {
                         <Text onPress={() => navigation.navigate("resetPassword")} style={styles.forgetText}>忘记密码?</Text>
                     </View>
                 </View>
+                {this.state.showModalScroll &&
+                <ModalScroll showModal={this.showModalScroll.bind(this)} />
+                
+                }
             </View>
         )
     }

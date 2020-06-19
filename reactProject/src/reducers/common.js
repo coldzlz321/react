@@ -4,7 +4,7 @@ import {
 } from "@/constants/actionTypes"
 
 inititalStates = {
-    loading:true
+    loading:false
 }
 
 export default function (state = inititalStates,action){
