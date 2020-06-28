@@ -1,7 +1,7 @@
 import {createStackNavigator, HeaderStyleInterpolators, CardStyleInterpolators, TransitionPresets} from '@react-navigation/stack';
 import StartUp from '@/views/StartUp/startup.js';
 import StartUpSecond from '@/views/StartUp/startupSecond.js'
-import VideoHome from "@/views/Video/video.js";
+import VideoHome from "@/views/video/video.js";
 import Personal from "@/views/personal/personal";
 import LoginIndex from "@/views/Login/index";
 import ResetPassword  from "@/views/Login/resetPassword";

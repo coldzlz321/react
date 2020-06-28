@@ -127,7 +127,7 @@ class LoginIndex extends Component {
                             this.state.activeTabIndex == 1 ?
                                 <View style={[styles.loginInputRow, { marginBottom: setSize(80) }]}>
                                     <Image source={passwordIcon} style={styles.loginImg} />
-                                    <TextInput secureTextEntry={true} textContentType="password" placeholder="请输入密码" placeholderTextColor="#999" ref={(ref) => this.password = ref} style={styles.loginInput} />
+                                    <TextInput keyboardType="numeric" secureTextEntry={true} textContentType="password" placeholder="请输入密码" placeholderTextColor="#999" ref={(ref) => this.password = ref} style={styles.loginInput} />
                                 </View>
                                 :
                                 <View style={[styles.loginInputRow, { marginBottom: setSize(80) }]}>
