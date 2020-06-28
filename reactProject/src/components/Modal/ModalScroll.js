@@ -46,6 +46,7 @@ export default class ModalScroll extends Component {
                         data={DATA}
                         showsVerticalScrollIndicator={false}
                         numColumns={2}
+                        initialNumToRender={12}
                         keyExtractor={(item,index) => index.toString()}
                         renderItem={({item,index}) =>
                     <View style={{height:setSize(200),flex:0.5,backgroundColor:"rgba(255,0,0,1)",marginBottom:setSize(40),marginRight:setSize(right(index))}}>

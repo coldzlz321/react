@@ -1,4 +1,4 @@
-import {createStackNavigator} from '@react-navigation/stack';
+import {createStackNavigator, HeaderStyleInterpolators, CardStyleInterpolators, TransitionPresets} from '@react-navigation/stack';
 import StartUp from '@/views/StartUp/startup.js';
 import StartUpSecond from '@/views/StartUp/startupSecond.js'
 import VideoHome from "@/views/Video/video.js";
@@ -14,7 +14,8 @@ import home from '@/views/Home/home.js'
 
 import React,{Component} from 'react'
 
-import {View,Text,StyleSheet,Image} from 'react-native'
+import {View,Text,StyleSheet,Image,Easing,Animated} from 'react-native'
+
 
 import Touchable from '@/components/Touchable/Touchable.js'
 import { setSize,setSizeText} from "@/utils/common/scale.js"
@@ -128,22 +129,79 @@ export default class AppContainer extends Component{
     }
 
     render(){
+      
+      var animOption =() => ({
+        gestureEnabled: true,
+        gestureDirection: 'horizontal',
+        transitionSpec: {
+          open: {
+            animation: 'timing',
+            config: {
+              duration: 2450,
+              easing: Easing.bezier(0.35, 0.39, 0, 1)
+            }
+          },
+          close: {
+            animation: 'timing',
+            config: {
+              duration: 2450,
+              easing: Easing.bezier(0.35, 0.39, 0, 1)
+            }
+          }
+        },
+        cardStyleInterpolator: ({ current, next, layouts }) => {
+        if(!!next){
+          var num = JSON.stringify(next.progress)
+          console.log(num,"ab")
+          var item = new Animated.Value(num)
+        
+          item.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, -layouts.screen.width * 0.3]
+          })
+        }else{
+          var num = Number(JSON.stringify(current.progress))
+          console.log(num,"aa")
+          var item = new Animated.Value(num)
+          
+          item.interpolate({
+            inputRange: [0, 1],
+            outputRange: [layouts.screen.width, 0]
+          })
+        }
+        
+         
+         
+          return {
+            cardStyle: {
+              transform: [
+                {
+                  translateX:item
+                }
+              ]
+            }
+          };
+        }
+      });
+      
         return (
             <NavigationContainer>
               
-              <Stack.Navigator mode="card" initialRouteName="StartUpOne">
+              <Stack.Navigator 
+              screenOptions={{
+                headerShown: false,
+                cardStyle: { backgroundColor: 'transparent' },
+                cardOverlayEnabled: true,
+                animationEnabled:true
+              }}
+              
+              initialRouteName="StartUpOne">
                
-                  <Stack.Screen name="StartUpOne" component={StartUp}
-                      options={{
-                          
-                          headerShown:false
-                        }}
+                  <Stack.Screen name="StartUpOne"  component={StartUp}
+                      options={animOption}
                   />
                   <Stack.Screen name="StartUpTwo" component={StartUpSecond}
-                      options={{
-                        
-                          headerShown:false
-                        }}
+                      options={animOption}
                 />
                 <Stack.Screen name="loginStack"
                   component={loginStack}
@@ -153,10 +211,7 @@ export default class AppContainer extends Component{
                 />
 
                  <Stack.Screen name="AppStack" component={tab}
-                     options={{
-                       
-                        headerShown:false
-                      }}
+                     options={animOption}
                 />
                     
               </Stack.Navigator>

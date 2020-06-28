@@ -24,7 +24,7 @@ export default class StartUpSecond extends Component{
         return (
             <View style={styles.container}>
                 <Animatable.View style={{flex:1,alignItems:'center'}}
-                    animation="fadeIn"
+                    animation="fadeIn" 
                 >
                     <Image style={styles.imgWrapper} resizeMode="cover" source={imgSource} />
                 </Animatable.View>

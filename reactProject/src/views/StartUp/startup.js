@@ -5,7 +5,8 @@ import {
     Text,
     StyleSheet,
     Image,
-    StatusBar
+    StatusBar,
+    Animated
 } from 'react-native'
 
 import Config from '@/styles/config.js'
@@ -35,11 +36,12 @@ export default class StartUpPage extends Component{
             var leftTime = self.state.topTime;
             if( leftTime == 0){
                 TimerMixin.clearInterval(self.timer)
-                navigation.navigate("StartUpTwo")
+                navigation.push("StartUpTwo")
                 return;
             }
             self.setState({topTime:--leftTime})
         } ,1000);
+    
     }
 
     componentWillUnmount(){
@@ -55,7 +57,7 @@ export default class StartUpPage extends Component{
                     <Text style={styles.timeText}>{this.state.topTime + "秒"}</Text>
                 </View> 
                 <Animatable.View style={{flex:1,alignItems:'center'}}
-                    animation="fadeIn"
+                    animation="fadeIn" easing="linear"
                 >
                    
                     <Image style={styles.imgWrapper} source={startUpImg} />
